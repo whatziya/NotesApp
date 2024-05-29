@@ -3,9 +3,27 @@
     xmlns:android="http://schemas.android.com/apk/res/android">
 
     <item
+        android:id="@+id/menu_settings"
+        android:title="Settings"/>
+    <item
         android:id="@+id/menu_search"
         android:icon="@drawable/baseline_search_24"
         android:title="Search"
         app:actionViewClass="android.widget.SearchView"
         app:showAsAction="ifRoom"/>
+    <item
+        android:id="@+id/menu_filter"
+        android:icon="@drawable/baseline_filter_list_24"
+        android:title="Filter"
+        app:showAsAction="ifRoom">
+        <menu>
+            <item
+                android:id="@+id/filter_low"
+                android:title="Sort by time"/>
+            <item
+                android:id="@+id/filter_high"
+                android:title="Sort by name"/>
+        </menu>
+    </item>
+
 </menu>

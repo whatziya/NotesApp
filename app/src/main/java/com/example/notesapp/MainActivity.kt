@@ -22,6 +22,13 @@ class MainActivity : AppCompatActivity() {
 
 
     }
+    fun onSearchClick(){
+        binding.toolbar.title = ""
+
+    }
+    fun onSearchClose(){
+        binding.toolbar.title = "NotesApp"
+    }
     private fun setupViewModel(){
         val noteRepository = NoteRepository(NoteDatabase(this))
         val viewModelProviderFactory =

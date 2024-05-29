@@ -7,12 +7,13 @@ import android.view.Menu
 import android.view.MenuInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.appcompat.widget.SearchView
+import android.widget.SearchView
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.StaggeredGridLayoutManager
 import com.example.notesapp.MainActivity
 import com.example.notesapp.R
 import com.example.notesapp.adapter.NoteAdapter
+import com.example.notesapp.databinding.ActivityMainBinding
 import com.example.notesapp.databinding.FragmentHomeBinding
 import com.example.notesapp.model.Note
 import com.example.notesapp.viewmodel.NoteViewModel
@@ -20,6 +21,8 @@ import com.example.notesapp.viewmodel.NoteViewModel
 class HomeFragment : Fragment(R.layout.fragment_home), SearchView.OnQueryTextListener {
     private var _binding: FragmentHomeBinding? = null
     private val binding get() = _binding!!
+    private var mainBinding: ActivityMainBinding? = null
+    private val mBinding get() = mainBinding!!
     private lateinit var noteViewModel: NoteViewModel
     private lateinit var noteAdapter: NoteAdapter
 
@@ -79,6 +82,19 @@ class HomeFragment : Fragment(R.layout.fragment_home), SearchView.OnQueryTextLis
         super.onCreateOptionsMenu(menu, inflater)
         menu.clear()
         inflater.inflate(R.menu.home_menu, menu)
+        val mMenuSearch = menu.findItem(R.id.menu_search).actionView as SearchView
+        mMenuSearch.isSubmitButtonEnabled = false
+        mMenuSearch.setOnQueryTextListener(this)
+        mMenuSearch.setOnSearchClickListener {
+            (requireActivity() as MainActivity)
+                .onSearchClick()
+        }
+        mMenuSearch.setOnCloseListener {
+            (requireActivity() as MainActivity)
+                .onSearchClose()
+            false
+        }
+
     }
 
     override fun onDestroy() {
